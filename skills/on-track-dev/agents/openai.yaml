@@ -1,0 +1,4 @@
+interface:
+  display_name: "按要求推进开发"
+  short_description: "管理软件需求、任务接续、验证证据和版本，在重要阶段主动解释设计"
+  default_prompt: "使用 $on-track-dev，根据当前项目和已确认要求开展工作。"
