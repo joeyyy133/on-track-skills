@@ -26,7 +26,7 @@
 
 ## 从 GitHub 获取并调用
 
-需要 Python 3.10+、Git。本轮候选使用分支 `codex/add-delivery-cleanup`；原有稳定版本分支 `V1.1.0` 保留。获取候选时，将三个 `skills/` 子目录作为本地 Skill 安装，或为当前 Agent 显式读取它们的 SKILL.md。每个 Skill 的脚本和 references 也必须一并获取，只读取网页中的 SKILL.md 不会自动安装依赖文件。
+需要 Python 3.10+、Git。获取 V1.2.0 时选择版本分支 `V1.2.0`；原有 `V1.1.0` 分支保留。获取后，将三个 `skills/` 子目录作为本地 Skill 安装，或为当前 Agent 显式读取它们的 SKILL.md。每个 Skill 的脚本和 references 也必须一并获取，只读取网页中的 SKILL.md 不会自动安装依赖文件。
 
 在 macOS/Linux 上，将本仓库克隆到长期保留的目录后，可将 `skills/on-track-dev`、`skills/project-explainer` 和 `skills/delivery-cleanup` 的绝对路径链接到客户端的个人 Skills 目录；同名技能已存在时先检查，不覆盖。当前客户端入口为 `~/.codex/skills/`。安装后在新会话检查技能是否可发现。
 
@@ -37,15 +37,15 @@
 
 仓库：https://github.com/joeyyy133/on-track-skills
 
-获取本轮候选：
+获取 V1.2.0：
 
 ```sh
-git clone --branch codex/add-delivery-cleanup --single-branch https://github.com/joeyyy133/on-track-skills.git
+git clone --branch V1.2.0 --single-branch https://github.com/joeyyy133/on-track-skills.git
 ```
 
 也可以把这句话交给下一次的 Agent：
 
-> 请读取 https://github.com/joeyyy133/on-track-skills 的 codex/add-delivery-cleanup 候选分支，获取 skills/on-track-dev、skills/project-explainer 和 skills/delivery-cleanup 的完整目录，检查现有同名技能后安装；在项目中使用 on-track-dev 推进，使用 project-explainer 解释设计，交付前使用 delivery-cleanup 收尾。
+> 请读取 https://github.com/joeyyy133/on-track-skills 的 V1.2.0 版本分支，获取 skills/on-track-dev、skills/project-explainer 和 skills/delivery-cleanup 的完整目录，检查现有同名技能后安装；在项目中使用 on-track-dev 推进，使用 project-explainer 解释设计，交付前使用 delivery-cleanup 收尾。
 
 远程以版本分支分发，尚未创建 GitHub Release 或远程 Git 标签；需要严格固定内容时使用发布提交的完整哈希。不要把可移动分支名当作不可变身份。
 
@@ -57,4 +57,4 @@ git clone --branch codex/add-delivery-cleanup --single-branch https://github.com
 
 `delivery-cleanup` 可单独安装；仅安装 `on-track-dev` 时继续按其现有安全边界清理，不因缺少清理技能而擅自安装或扩大删除范围。清理不替代测试，也不构成 Final 的用户确认。
 
-本轮 V1.2.0 为待确认候选，使用 codex/add-delivery-cleanup 草稿 PR 审阅。确认前不合并 main、不建立 V1.2.0 发布分支，也不切换本机 delivery-cleanup 安装入口。
+V1.2.0 的接入改动见 [PR #1](https://github.com/joeyyy133/on-track-skills/pull/1)。本机三个技能入口统一链接至套件源码；这避免安装副本，但不会自动执行 Git 更新。
