@@ -1,0 +1,6 @@
+interface:
+  display_name: "交付前清理"
+  short_description: "交付前检查最终文件与依赖，清理可确认无用的生成脚本、模板、草稿和缓存"
+  default_prompt: "使用 $delivery-cleanup 检查这次交付，只保留最终成果和必要依赖，清理已确认无用的生成中间产物。"
+policy:
+  allow_implicit_invocation: true

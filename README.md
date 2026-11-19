@@ -1,14 +1,15 @@
-# 软件开发协作套件 V1.1.0
+# 开发与交付协作套件 V1.2.0
 
-两个独立可发现的 Skill：`$on-track-dev` 负责按需求推进，`$project-explainer` 负责理解与审查。自动发现默认开启；重要阶段由执行 Skill 主动解释，独立解释 Skill 也可随时调用。
+三个独立可发现的 Skill：`$on-track-dev` 负责按需求推进，`$project-explainer` 负责理解与审查，`$delivery-cleanup` 负责交付收尾与中间产物清理。自动发现默认开启；重要阶段由执行 Skill 主动解释，独立解释 Skill 也可随时调用。
 
 开始：`使用 $on-track-dev 推进这个项目，先检查已有代码和最新确认要求。`
 了解：`使用 $project-explainer 告诉我现在做到哪里，从入口到数据存储解释实现，并挑战重要假设。`
 恢复：`使用 $on-track-dev 从磁盘状态恢复，核对当前需求版本，继续下一步。`
+收尾：`使用 $delivery-cleanup 检查这次交付，只保留最终成果和必要依赖，清理已确认无用的中间产物。`
 
-规则：先覆盖软件开发；目标/验收/范围/重要设计变化由用户确认；细节自主推进；V1.0.0 三段编号；源码原地更新、Git 留历史；Final 为确认后的版本指针；只保留当前 Final 与指定里程碑；每个重要阶段主动中文讲解。
+规则：`on-track-dev` 与 `project-explainer` 覆盖软件开发；`delivery-cleanup` 也可独立用于报告、文档、表格、图片等文件交付；目标/验收/范围/重要设计变化由用户确认；细节自主推进；V1.0.0 三段编号；源码原地更新、Git 留历史；Final 为确认后的版本指针；只保留当前 Final 与指定里程碑；每个重要阶段主动中文讲解。
 
-需求、产品和 Skill 自身的版本互不混用。本套件版本 V1.1.0 不代表任何业务项目已获 Final 确认。Skill 不等于常驻 Agent，也不会自动创建计划任务、CI 或 hook。
+需求、产品和 Skill 自身的版本互不混用。本套件版本 V1.2.0 不代表任何业务项目已获 Final 确认。Skill 不等于常驻 Agent，也不会自动创建计划任务、CI 或 hook。
 
 安装入口为个人 `~/.codex/skills/` 下的同名符号链接，指向本目录的唯一源码，避免安装副本。请保留本目录；移动时需相应更新入口。新会话的可发现性需由客户端实际加载验证；本会话不因文件落盘而自动刷新技能列表。初始化业务项目时先读其规则并复用已有规范，不能在所有项目中无条件增加文件。
 
@@ -25,9 +26,9 @@
 
 ## 从 GitHub 获取并调用
 
-需要 Python 3.10+、Git。克隆本仓库时选择版本分支 `V1.1.0`，将两个 `skills/` 子目录作为本地 Skill 安装，或为当前 Agent 显式读取它们的 SKILL.md。每个 Skill 的脚本和 references 也必须一并获取，只读取网页中的 SKILL.md 不会自动安装依赖文件。
+需要 Python 3.10+、Git。获取 V1.2.0 时选择版本分支 `V1.2.0`；原有 `V1.1.0` 分支保留。获取后，将三个 `skills/` 子目录作为本地 Skill 安装，或为当前 Agent 显式读取它们的 SKILL.md。每个 Skill 的脚本和 references 也必须一并获取，只读取网页中的 SKILL.md 不会自动安装依赖文件。
 
-在 macOS/Linux 上，将本仓库克隆到长期保留的目录后，可将 `skills/on-track-dev` 和 `skills/project-explainer` 的绝对路径链接到客户端的个人 Skills 目录；同名技能已存在时先检查，不覆盖。当前客户端入口为 `~/.codex/skills/`。安装后在新会话检查技能是否可发现。
+在 macOS/Linux 上，将本仓库克隆到长期保留的目录后，可将 `skills/on-track-dev`、`skills/project-explainer` 和 `skills/delivery-cleanup` 的绝对路径链接到客户端的个人 Skills 目录；同名技能已存在时先检查，不覆盖。当前客户端入口为 `~/.codex/skills/`。安装后在新会话检查技能是否可发现。
 
 普通恢复：`python3 <技能目录>/scripts/ontrack.py resume <项目目录>`。它只读取记录，不执行 next_action。未使用本套件时也可阅读 references 中的流程并手动执行；没有 CI/hook 就不存在自动强制检查。
 
@@ -36,14 +37,24 @@
 
 仓库：https://github.com/joeyyy133/on-track-skills
 
-获取固定版本：
+获取 V1.2.0：
 
 ```sh
-git clone --branch V1.1.0 --single-branch https://github.com/joeyyy133/on-track-skills.git
+git clone --branch V1.2.0 --single-branch https://github.com/joeyyy133/on-track-skills.git
 ```
 
 也可以把这句话交给下一次的 Agent：
 
-> 请读取 https://github.com/joeyyy133/on-track-skills 的 V1.1.0 版本，获取 skills/on-track-dev 和 skills/project-explainer 的完整目录，检查现有同名技能后安装；在项目中使用 on-track-dev 推进，使用 project-explainer 解释设计。
+> 请读取 https://github.com/joeyyy133/on-track-skills 的 V1.2.0 版本分支，获取 skills/on-track-dev、skills/project-explainer 和 skills/delivery-cleanup 的完整目录，检查现有同名技能后安装；在项目中使用 on-track-dev 推进，使用 project-explainer 解释设计，交付前使用 delivery-cleanup 收尾。
 
 远程以版本分支分发，尚未创建 GitHub Release 或远程 Git 标签；需要严格固定内容时使用发布提交的完整哈希。不要把可移动分支名当作不可变身份。
+
+## 交付清理的接入方式
+
+执行顺序：实现与验证 → 读取并执行 `delivery-cleanup` → 复核最终文件和依赖 → 交付。本套件通过指令衔接，不是脚本自动调用、常驻清理进程或已强制运行的 hook。
+
+临时生成材料优先放专属系统临时目录；交付前真正删除无后续用途的中间产物，移入隐藏目录不算完成。软件源码、需求/状态/验证证据、用户原件、指定里程碑及用户需要的多种交付格式保留。对旧任务的清理仍需明确授权，不按文件名猜测归属。
+
+`delivery-cleanup` 可单独安装；仅安装 `on-track-dev` 时继续按其现有安全边界清理，不因缺少清理技能而擅自安装或扩大删除范围。清理不替代测试，也不构成 Final 的用户确认。
+
+V1.2.0 的接入改动见 [PR #1](https://github.com/joeyyy133/on-track-skills/pull/1)。本机三个技能入口统一链接至套件源码；这避免安装副本，但不会自动执行 Git 更新。
